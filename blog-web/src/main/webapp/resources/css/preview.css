@@ -1,0 +1,31 @@
+a{
+    text-decoration: none;
+}
+.main {
+    max-width: 700px;
+    margin: 100px auto;
+}
+.title{
+    padding-bottom: 10px;
+}
+.desc{
+    text-align: left;
+    padding:5px 15px 5px 15px;
+    border:1px dashed #dedede;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.title h1{
+    word-break: break-all;
+    margin: 20px 0 0;
+    font-size: 34px;
+    font-weight: 700;
+    color: #333;
+    text-align: left;
+    padding-left: 20px;
+}
+.editormd-html-preview {
+    width: 90%;
+    margin: 0 auto;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lecoder.blog.dao.mapper.UserInfoMapper">
+
+    <sql id="userInfoColumns">
+        id,user_id,username,fullname,cellphone,gender,profile,gmt_create,gmt_modified
+    </sql>
+
+	<resultMap type="com.lecoder.blog.po.BlogUserInfo" id="userInfoMap">
+		<id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+		<result column="user_id" property="userId"/>
+		<result column="username" property="username"/>
+		<result column="fullname" property="fullname"/>
+		<result column="cellphone" property="cellphone"/>
+		<result column="gender" property="gender" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+		<result column="profile" property="profile"/>
+		<result column="gmt_create" property="gmtCreate"/>
+		<result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	
+	<insert id="saveUserInfo" parameterType="com.lecoder.blog.po.BlogUserInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT into blog_user_info (user_id,username,gender,gmt_create) 
+		value(#{userId},#{username},#{gender,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},now())
+	</insert>
+	
+	<select id="findUserInfoByUsername" resultMap="userInfoMap">
+       SELECT <include refid="userInfoColumns"/> from blog_user_info where username = #{username}
+    </select>
+    
+    <select id="findUserInfoByUserId" resultMap="userInfoMap">
+       SELECT <include refid="userInfoColumns"/> from blog_user_info where user_id = #{userId}
+    </select>
+	
+</mapper>

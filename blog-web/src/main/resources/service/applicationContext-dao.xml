@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	    http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+        
+	<context:annotation-config/>
+    
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- dbcp 数据库连接池配置 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${mysql.driver}" />
+        <property name="url" value="${mysql.url}" />
+        <property name="username" value="${mysql.username}" />
+        <property name="password" value="${mysql.password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${mysql.initialSize}" />
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${mysql.maxActive}" />
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${mysql.maxIdle}" />
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${mysql.minIdle}" />
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${mysql.maxWait}" />
+        
+        <property name="defaultAutoCommit" value="true"/>
+    </bean>
+    
+    <!-- 数据库会话工厂配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="mapperLocations" value="classpath:service/mapper/*.xml"></property>
+    </bean>
+    
+    <!-- Mapper自动扫描配置 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lecoder.blog.dao.mapper"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+	
+</beans>

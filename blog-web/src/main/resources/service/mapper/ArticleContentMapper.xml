@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lecoder.blog.dao.mapper.ArticleContentMapper">
+
+    <sql id="articleContentColumns">
+        id,article_id,article_content,gmt_create,gmt_modified
+    </sql>
+
+	<resultMap type="com.lecoder.blog.po.BlogArticleContent" id="articleContentMap">
+		<id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+		<result column="article_id" property="articleId"/>
+		<result column="article_content" property="articleContent"/>
+		<result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	
+	<insert id="saveArticleContent" parameterType="com.lecoder.blog.po.BlogArticleContent" useGeneratedKeys="true" keyProperty="id">
+		INSERT into blog_article_content (article_id,article_content,gmt_create) value(#{articleId},#{articleContent},now())
+	</insert>
+	
+	<select id="findArticleContentByArticleId" resultMap="articleContentMap">
+	    SELECT <include refid="articleContentColumns"/> FROM blog_article_content where article_id = #{articleId}
+	</select>
+	
+</mapper>

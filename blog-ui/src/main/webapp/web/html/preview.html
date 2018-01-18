@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预览</title>
+    <link type="text/css" rel="stylesheet" href="../css/preview.css">
+    <link rel="stylesheet" href="../plugins/editor-md/css/editormd.preview.css" />
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="../img/logo.png">
+        </div>
+        <div class="nav">
+            <ul class="navList">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">推荐</a></li>
+                <li><a href="#">留言板</a></li>
+            </ul>
+        </div>
+        <div class="profile">
+            <img src="../img/avatar.png">
+        </div>
+    </div>
+    <div class="main">
+        <div class="title">
+            <h1>掌上广分接口文档</h1>
+        </div>
+        <div class="desc">
+            发布日期：2017-12-12 &nbsp;&nbsp;作者：玉米队长 &nbsp;&nbsp;&nbsp;
+        </div>
+        <div id="test-editormd-view2">
+                <textarea id="append-test" style="display:none;">
+
+## 获取Ticket ##
+请求方式：
+POST
+
+[http://10.71.128.90/m/admin/json_login.do](http://10.71.128.90/m/admin/json_login.do "http://10.71.128.90/m/admin/json_login.do")
+
+参数说明：
+
+|参数| 参数类型 |说明|
+|:---:|:------:|:-----:
+|username|String|用户名，如：zhangsan|
+|password|String|密码|
+返回结果
+```
+{
+    "errorMsg":"",
+    "info":
+    {
+        "gender":"",
+        "idno":"440881199201131053",
+        "mno":"13751720747",
+        "name":"利积乐",
+        "tgt":"tgt-1511430622569-c04b7a2d9af84a0684409646dbc11cbd",
+        "username":"lijile"
+    },
+    "msg":"登录成功",
+    "result":"0"
+}
+```
+## 获取工作菜单列表 ##
+请求方式：
+GET
+[http://10.71.128.90/m/app/works.do](http://10.71.128.90/m/app/works.do "http://10.71.128.90/m/app/works.do")
+
+参数说明：(header)
+
+|参数| 参数类型 |说明|
+|:---:|:------:|:-----:
+|Authorization|String|ticket值，登录成功以后返回的tgt|
+
+返回结果
+```
+{
+    "result":"0",
+    "msg":"success",
+    "errorMsg":"",
+    "info":
+    [
+        {
+            "id":1,
+            "name":"业绩报表",
+            "url":"/report/index.do",
+            "icon":"/uploads/work_report.png"
+        },
+        {
+            "id":2,
+            "name":"同业营运",
+            "url":"/service/index.do",
+            "icon":"/uploads/work_service.png"
+        },
+        {
+            "id":4,
+            "name":"同业市场",
+            "url":"/market/index.do",
+            "icon":"/uploads/a7d96781dd074636ae7cc5907e65b4b5.png"
+        },
+        {
+            "id":5,
+            "name":"休假",
+            "url":"/leave/index.do",
+            "icon":"/uploads/b4d3f1c332724459be3443d612a8760f.png"
+        },
+        {
+            "id":6,
+            "name":"会议",
+            "url":"/meeting/index.do",
+            "icon":"/uploads/aa0f7d45ecf441c0be978116034cfe25.png"
+        },
+        {
+            "id":10,
+            "name":"工资条",
+            "url":"/wage/index.do",
+            "icon":"/uploads/a5e7bd9d0c4e478ab5884ecf3836b7cf.png"
+        }
+    ]
+}
+```
+## 获取花名册 ##
+请求方式：
+GET
+[http://10.71.128.90/m/app/roster.do](http://10.71.128.90/m/app/roster.do "http://10.71.128.90/m/app/roster.do")
+
+参数说明：(header)
+
+|参数| 参数类型 |说明|
+|:---:|:------:|:-----:
+|Authorization|String|ticket值，登录成功以后返回的tgt|
+
+返回结果
+```
+{
+    "result":"0",
+    "msg":"success",
+    "errorMsg":"",
+    "info":
+    [
+        {
+            "jid":"admin@gdcpiclife",
+            "name":"Administrator",
+            "department":"信息技术部"
+        },
+        {
+            "jid":"lijile@gdcpiclife",
+            "name":"利积乐",
+            "department":"信息技术部"
+        }
+    ]
+}
+```</textarea>
+        </div>
+    </div>
+    <script src="../plugins/editor-md/js/jquery.min.js"></script>
+    <script src="../plugins/editor-md/lib/marked.min.js"></script>
+    <script src="../plugins/editor-md/lib/prettify.min.js"></script>
+
+    <script src="../plugins/editor-md/lib/raphael.min.js"></script>
+    <script src="../plugins/editor-md/lib/underscore.min.js"></script>
+    <script src="../plugins/editor-md/lib/sequence-diagram.min.js"></script>
+    <script src="../plugins/editor-md/lib/flowchart.min.js"></script>
+    <script src="../plugins/editor-md/lib/jquery.flowchart.min.js"></script>
+
+    <script src="../plugins/editor-md/editormd.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var testEditormdView, testEditormdView2;
+
+            $.get("test.md", function(markdown) {
+
+                testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+                    markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
+                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    //toc             : false,
+                    tocm            : true,    // Using [TOCM]
+                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                    //gfm             : false,
+                    //tocDropdown     : true,
+                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true,  // 默认不解析
+                });
+
+                //console.log("返回一个 jQuery 实例 =>", testEditormdView);
+
+                // 获取Markdown源码
+                //console.log(testEditormdView.getMarkdown());
+
+                //alert(testEditormdView.getMarkdown());
+            });
+
+            testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+                htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true,  // 默认不解析
+            });
+        });
+    </script>
+</body>
+</html>

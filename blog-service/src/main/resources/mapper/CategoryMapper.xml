@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lecoder.blog.dao.mapper.CategoryMapper">
+
+    <sql id="categoryColumns">
+        id,category_code,category_name,gmt_create,gmt_modified
+    </sql>
+
+	<resultMap type="com.lecoder.blog.po.BlogCategory" id="categoryMap">
+		<id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+		<result column="category_code" property="categoryCode"/>
+		<result column="category_name" property="categoryName"/>
+		<result column="gmt_create" property="gmtCreate"/>
+		<result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	
+	<insert id="saveCategory" parameterType="com.lecoder.blog.po.BlogCategory" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO blog_category (category_code,category_name,gmt_create) 
+		SELECT #{categoryCode},#{categoryName},NOW() FROM DUAL WHERE NOT EXISTS (
+		SELECT id FROM blog_category WHERE category_name = #{categoryName})
+	</insert>
+	
+	<select id="listCategory" resultMap="categoryMap">
+	    SELECT <include refid="categoryColumns"/> FROM blog_category
+	</select>
+	
+</mapper>

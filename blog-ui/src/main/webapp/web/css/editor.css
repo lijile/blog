@@ -1,0 +1,193 @@
+a{
+    text-decoration: none;
+}
+.header{
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid #f0f0f0;
+    background-color: #fff;
+    z-index: 1000;
+}
+.logo{
+    float:left;
+    height: 50px;
+    padding: 14px 0px 0px 40px;
+}
+.logo img{
+    width:120px;
+}
+.nav{
+    float:left;
+    height:56px;
+}
+.navList{
+    height: 56px;
+    margin: 0;
+    padding-left: 30px;
+}
+.navList li{
+    float: left;
+    height: 56px;
+    line-height: 56px;
+    list-style-type: none;
+}
+.navList a{
+    padding: 0 20px;
+    font-size: 20px;
+    display: block;
+    color: #333;
+    text-decoration: none;
+}
+.profile{
+    float: right;
+    height: 56px;
+    padding: 8px 40px 0px 20px;
+}
+.profile img{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+.main {
+    margin-top: 60px;
+    clear: both;
+}
+.inputDiv{
+    width:90%;
+    height:50px;
+    float: left;
+    margin: 10px;
+    line-height: 50px;
+    font-size: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+    border: 1px solid #dedede;
+}
+.submitArticle{
+    margin-top: 15px;
+    margin-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height:40px;
+    line-height:40px;
+    color: white;
+    background: #EA6F5A;
+    float: right;
+}
+.personalType{
+    min-height: 50px;
+}
+.tabName{
+    height: 50px;
+    line-height: 50px;
+    width: 70px;
+    float: left;
+}
+.personalType .inputType{
+    width: 80%;
+    min-height:40px;
+    margin: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 40px;
+    float: left;
+    text-align: left;
+    border: 1px solid #dedede;
+}
+
+.inputType span{
+    float: left;
+    list-style: none;
+    background: #EEEEEE;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 30px;
+    height: 25px;
+    font-size: 13px;
+    line-height: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 8px;
+}
+.inputType span a{
+    padding-left: 8px;
+}
+.inputType input{
+    border: 0;
+    padding: 0 5px;
+    height:25px;
+}
+.summary{
+    min-height: 100px;
+}
+.summary textarea{
+    width: 80%;
+    height: 100px;
+    margin: 5px;
+    padding: 5px;
+    float: left;
+}
+.modal-body{
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.myType{
+    padding-left: 75px;
+}
+.myType span{
+    float: left;
+    list-style: none;
+    background: #EEEEEE;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 30px;
+    height: 25px;
+    font-size: 13px;
+    line-height: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 8px;
+}
+.myType span a{
+    padding-left: 8px;
+}
+.articleType{
+    width: 100%;
+    float: left;
+}
+.articleType .inputType{
+    width: 80%;
+    min-height:40px;
+    margin: 5px;
+    padding-top: 8px;
+    float: left;
+    text-align: left;
+}
+.inputType select{
+    width: 100%;
+    padding: 3px;
+}
+.moreArticle{
+    width: 100%;
+    float: left;
+}
+.moreArticle .inputMore{
+    width: 80%;
+    min-height:40px;
+    margin: 5px;
+    padding-top: 8px;
+    float: left;
+    text-align: left;
+}
+.moreArticle input{
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #dedede;
+}
+
