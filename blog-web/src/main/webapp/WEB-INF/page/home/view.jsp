@@ -15,7 +15,7 @@ request.setAttribute("basePath",basePath);
 </head>
 <body>
     <%@ include file="../header.jsp" %>
-    <div class="main">
+    <div class="main" style="margin:100px auto;">
         <div class="title">
             <h1>${article.title }</h1>
         </div>

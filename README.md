@@ -9,9 +9,42 @@
 |MyBatis|ORM框架|http://www.mybatis.org/mybatis-3/zh/index.html|
 |ZooKeeper|分布式协调服务|http://zookeeper.apache.org/|
 |Dubbo|分布式服务框架|http://dubbo.io/|
+|solr|全文搜索引擎|http://lucene.apache.org/solr/|
 |Maven|项目构建管理|http://maven.apache.org/|
 # 前端技术
 |技术|名称|官网|
 |----|----|----|
 |jQuery|函式库|    http://jquery.com/|
+|Editor.md|Markdown编辑器|https://github.com/pandao/editor.md|
 |Bootstrap|前端框架|http://getbootstrap.com/|
+# 模块介绍
+|模块名|描述|
+|----|----|
+|blog-common|公共模块，如工具类|
+|blog-pojo|简单java对象模块，用于存放持久对象类，值对象类等|
+|blog-dao|服务端DAO模块，数据访问对象，主要是数据库操作|
+|blog-interface|服务层接口，方便表示层调用和分布式部署|
+|blog-service|服务层接口实现|
+|blog-solr|博客全文搜索模块|
+|blog-ui|ui模块，前端静态网页|
+|blog-admin|后台管理系统模块|
+|blog-web|博客网站模块|
+# 主要系统截图
+- 登录
+![登录](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/sign-in.png)
+- 博客搜索
+![搜索](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/search.png)
+- 博客编辑
+![编辑器](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/editor.png)
+- 博客设置
+![属性设置](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/article_setting.png)
+- 文章浏览
+![浏览](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/preview.png)
+# 本地测试运行顺序
+mvn install blog-common
+mvn install blog-pojo
+mvn install blog-dao
+mvn install blog-interface
+mvn install blog-service
+mvn install blog-solr
+mvn tomcat7:run blog-web
