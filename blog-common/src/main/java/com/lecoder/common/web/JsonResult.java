@@ -1,4 +1,4 @@
-package com.lecoder.blog.web.common;
+package com.lecoder.common.web;
 
 public class JsonResult {
 	

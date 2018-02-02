@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServerException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,18 @@ import com.lecoder.blog.dao.mapper.ArticleContentMapper;
 import com.lecoder.blog.dao.mapper.ArticleMapper;
 import com.lecoder.blog.dao.mapper.ArticleTagMapper;
 import com.lecoder.blog.dao.mapper.UserInfoMapper;
+import com.lecoder.blog.po.ArticleDetail;
 import com.lecoder.blog.po.BlogArticle;
 import com.lecoder.blog.po.BlogArticleContent;
 import com.lecoder.blog.po.BlogArticleTag;
 import com.lecoder.blog.po.BlogUserInfo;
+import com.lecoder.blog.po.UserDetail;
 import com.lecoder.blog.service.ArticleService;
 import com.lecoder.blog.solr.bean.ArticleSolr;
 import com.lecoder.blog.solr.search.ArticleSearcher;
 import com.lecoder.blog.vo.Article;
+import com.lecoder.blog.vo.User;
+import com.lecoder.common.web.Pager;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -144,6 +149,26 @@ public class ArticleServiceImpl implements ArticleService {
 			e.printStackTrace();
 		}
 		return articles;
+	}
+
+	@Override
+	public Pager listArticleWithPage(Integer page, Integer pageSize, Integer record) {
+		int start = Pager.getStartOfPage(page, pageSize);
+		int totalSize = record;
+		if (record == 0) {
+			totalSize = articleMapper.queryForCount();
+		}
+		List<ArticleDetail> data = articleMapper.listArticle(start,pageSize);
+		List<Article> articles = new ArrayList<>(data.size());
+		for(ArticleDetail articleDetail : data) {
+			Article article = new Article();
+			BeanUtils.copyProperties(articleDetail, article);
+			article.setGmtCreate(articleDetail.getGmtCreate());
+			article.setGmtModified(articleDetail.getGmtModified());
+			articles.add(article);
+		}
+		Pager pager = new Pager(start, totalSize, pageSize, articles);
+		return pager;
 	}
 
 }

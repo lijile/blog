@@ -41,10 +41,10 @@
 - 文章浏览
 ![浏览](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/preview.png)
 # 本地测试运行顺序
-mvn install blog-common
-mvn install blog-pojo
-mvn install blog-dao
-mvn install blog-interface
-mvn install blog-service
-mvn install blog-solr
-mvn tomcat7:run blog-web
+mvn install blog-common  
+mvn install blog-pojo  
+mvn install blog-dao  
+mvn install blog-interface  
+mvn install blog-service  
+mvn install blog-solr  
+mvn tomcat7:run blog-web  

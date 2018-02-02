@@ -20,8 +20,8 @@ import com.lecoder.blog.vo.ArticleTag;
 import com.lecoder.blog.vo.Category;
 import com.lecoder.blog.vo.User;
 import com.lecoder.blog.web.common.Constants;
-import com.lecoder.blog.web.common.JsonResult;
 import com.lecoder.common.utils.StringUtils;
+import com.lecoder.common.web.JsonResult;
 
 @Controller
 @RequestMapping("/article")

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lecoder.blog.dao.mapper.PermissionMapper">
+
+    <sql id="permissionColumns">
+        id,permission,description,gmt_create,gmt_modified
+    </sql>
+
+	<resultMap type="com.lecoder.blog.po.BlogPermission" id="permissionMap">
+		<id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+		<result column="permission" property="permission"/>
+		<result column="description" property="description"/>
+		<result column="gmt_create" property="gmtCreate"/>
+		<result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	
+	<select id="findPermissionsByUsername" resultMap="permissionMap">
+	   SELECT t1.id as id,t1.permission as permission,t1.description as description,t1.gmt_create as gmt_create,t1.gmt_modified as gmt_modified FROM blog_permission t1
+		LEFT JOIN blog_role_permission t2 ON t1.id = t2.permission_id
+		LEFT JOIN blog_user_role t3 ON t2.role_id = t3.role_id
+		LEFT JOIN blog_user t4 ON t3.user_id = t4.id
+		WHERE t4.username = #{username}
+	</select>
+	
+</mapper>

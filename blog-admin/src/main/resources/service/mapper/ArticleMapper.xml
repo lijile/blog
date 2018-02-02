@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lecoder.blog.dao.mapper.ArticleMapper">
+
+    <sql id="articleColumns">
+        id,title,summary,user_id,category_id,extra_url,gmt_create,gmt_modified
+    </sql>
+
+	<resultMap type="com.lecoder.blog.po.BlogArticle" id="articleMap">
+		<id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+		<result column="title" property="title"/>
+		<result column="summary" property="summary"/>
+		<result column="user_id" property="userId"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="extra_url" property="extraUrl"/>
+		<result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	
+	<resultMap type="com.lecoder.blog.po.ArticleDetail" id="articleDetailMap">
+	    <id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+	    <result column="user_id" property="userId"/>
+	    <result column="username" property="username"/>
+	    <result column="fullname" property="fullname"/>
+        <result column="title" property="title"/>
+        <result column="summary" property="summary"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="extra_url" property="extraUrl"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	
+	<insert id="saveArticle" parameterType="com.lecoder.blog.po.BlogArticle" useGeneratedKeys="true" keyProperty="id">
+		INSERT into blog_article (title,summary,user_id,category_id,extra_url,gmt_create) value(#{title},#{summary},#{userId},#{categoryId},#{extraUrl},now())
+	</insert>
+	
+	<select id="listUserArticleLimit" resultMap="articleMap">
+        SELECT <include refid="articleColumns"/> FROM blog_article
+            WHERE user_id = (
+            SELECT id FROM blog_user WHERE username = #{username}
+            )
+            ORDER BY id DESC
+            LIMIT #{start},#{offset}
+    </select>
+	
+	<select id="findArticleById" resultMap="articleMap">
+	    SELECT <include refid="articleColumns"/> FROM blog_article WHERE id = #{id}
+	</select>
+	
+	<select id="listArticleLimit" resultMap="articleMap">
+        SELECT <include refid="articleColumns"/> FROM blog_article where 1 = 1
+        <if test="lastId != 0">
+            and id &lt; #{lastId}
+        </if>
+        ORDER BY id DESC
+        LIMIT 0,#{offset}
+    </select>
+    
+    <select id="queryForCount" resultType="int">
+        SELECT count(*) FROM blog_article
+    </select>
+    
+    <select id="listArticle" resultMap="articleDetailMap">
+        SELECT t1.id as id,t2.id as user_id,t2.username as username,t1.title as title,t1.summary as summary,t1.gmt_create as gmt_create 
+		FROM blog_article t1
+		LEFT JOIN blog_user t2 ON t1.user_id = t2.id
+		ORDER BY id DESC 
+		LIMIT #{start},#{offset}
+    </select>
+	
+</mapper>

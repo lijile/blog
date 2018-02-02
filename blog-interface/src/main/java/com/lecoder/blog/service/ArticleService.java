@@ -2,6 +2,7 @@ package com.lecoder.blog.service;
 
 import java.util.List;
 import com.lecoder.blog.vo.Article;
+import com.lecoder.common.web.Pager;
 
 public interface ArticleService {
 
@@ -14,4 +15,6 @@ public interface ArticleService {
 	List<Article> listArticle(Integer lastId);
 
 	List<Article> searchArticle(String keywords, Integer page);
+
+	Pager listArticleWithPage(Integer page, Integer pageSize, Integer record);
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lecoder.blog.dao.mapper.UserMapper">
+
+    <sql id="userColumns">
+        id,username,password,status,gmt_create,gmt_modified
+    </sql>
+
+	<resultMap type="com.lecoder.blog.po.BlogUser" id="userMap">
+		<id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="status" property="status"/>
+		<result column="gmt_create" property="gmtCreate"/>
+		<result column="gmt_modified" property="gmtModified"/>
+	</resultMap>
+	
+	<resultMap type="com.lecoder.blog.po.UserDetail" id="userDetailMap">
+        <id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
+        <result column="username" property="username"/>
+        <result column="status" property="status"/>
+        <result column="fullname" property="fullname"/>
+        <result column="cellphone" property="cellphone"/>
+        <result column="gender" property="gender"/>
+        <result column="profile" property="profile"/>
+        
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+	
+	<insert id="saveUser" parameterType="com.lecoder.blog.po.BlogUser" useGeneratedKeys="true" keyProperty="id">
+		INSERT into blog_user (username,password,gmt_create) (
+		SELECT #{username},#{password},now() FROM dual where NOT EXISTS (
+		SELECT username from blog_user where username = #{username}))
+	</insert>
+	
+	<select id="findUserByUsername" resultMap="userMap">
+	   SELECT <include refid="userColumns"/> from blog_user where username = #{username}
+	</select>
+	
+	<select id="listUser" resultMap="userDetailMap">
+	   SELECT t1.id as id,t1.username as username,t2.fullname as fullname,t2.cellphone as cellphone,t1.gmt_create as gmt_create,t1.status as status
+		FROM blog_user t1
+		LEFT JOIN blog_user_info t2 ON t1.id=t2.user_id LIMIT #{start},#{offset}
+	</select>
+	
+	<select id="queryForCount" resultType="int">
+	   SELECT count(*) FROM blog_user
+	</select>
+</mapper>
