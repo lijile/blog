@@ -10,6 +10,7 @@
 |ZooKeeper|分布式协调服务|http://zookeeper.apache.org/|
 |Dubbo|分布式服务框架|http://dubbo.io/|
 |solr|全文搜索引擎|http://lucene.apache.org/solr/|
+|Apache Shiro|安全框架|http://shiro.apache.org/|
 |Maven|项目构建管理|http://maven.apache.org/|
 # 前端技术
 |技术|名称|官网|
@@ -17,6 +18,7 @@
 |jQuery|函式库|    http://jquery.com/|
 |Editor.md|Markdown编辑器|https://github.com/pandao/editor.md|
 |Bootstrap|前端框架|http://getbootstrap.com/|
+|Ace Admin|后台管理界面模板|https://github.com/bopoda/ace|
 # 模块介绍
 |模块名|描述|
 |----|----|
@@ -30,16 +32,16 @@
 |blog-admin|后台管理系统模块|
 |blog-web|博客网站模块|
 # 主要系统截图
-- 登录
-![登录](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/sign-in.png)
-- 博客搜索
-![搜索](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/search.png)
-- 博客编辑
+- 前端博客
+![登录](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/search.png)
+
 ![编辑器](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/editor.png)
-- 博客设置
-![属性设置](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/article_setting.png)
-- 文章浏览
+
 ![浏览](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/preview.png)
+
+- 后台管理
+![登录](https://raw.githubusercontent.com/lijile/blog/master/blog-ui/src/main/webapp/images/admin_article_summary.png)
+
 # 本地测试运行顺序
 mvn install blog-common  
 mvn install blog-pojo  

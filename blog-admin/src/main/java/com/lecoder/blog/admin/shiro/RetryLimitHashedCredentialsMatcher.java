@@ -5,19 +5,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.DefaultHashService;
-import org.apache.shiro.crypto.hash.HashRequest;
-import org.apache.shiro.crypto.hash.HashService;
-import org.apache.shiro.crypto.hash.format.DefaultHashFormatFactory;
-import org.apache.shiro.crypto.hash.format.Shiro1CryptFormat;
-import org.apache.shiro.util.ByteSource;
-import org.apache.shiro.util.SimpleByteSource;
 
 /**
  * 密码重复次数限制
@@ -49,18 +39,6 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
 			passwordRetryCache.remove(username);
 		}
 		return matches;
-	}
-	
-	public static void main(String[] args) {
-		DefaultHashService hashService = new DefaultHashService(); //默认算法SHA-512
-		HashRequest request = new HashRequest.Builder()
-			.setAlgorithmName("MD5")
-			.setSource(ByteSource.Util.bytes("123456"))
-			.setSalt("lijilelecoder")
-			.setIterations(1).build();
-		String hex = hashService.computeHash(request).toHex();
-		System.out.println(hex);
-		
 	}
 
 }

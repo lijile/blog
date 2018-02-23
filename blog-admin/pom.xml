@@ -41,7 +41,13 @@
             <artifactId>blog-dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-	   <!-- JSP相关 -->
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+	    <!-- JSP相关 -->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
